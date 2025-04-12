@@ -1,6 +1,6 @@
 services:
   openai_forward:
-    image: beidongjiedeguang/openai-forward:webui-latest
+    image: beidongjiedeguang/openai-forward:webui-v0.8.1
     env_file:
       .env
     ports:

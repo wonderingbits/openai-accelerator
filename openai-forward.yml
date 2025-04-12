@@ -1,0 +1,24 @@
+services:
+  openai_forward:
+    image: beidongjiedeguang/openai-forward:webui-latest
+    env_file:
+      .env
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    volumes:
+      - ./openai-forward/FLAXKV_DB:/home/openai-forward/FLAXKV_DB
+      - ./openai-forward/Log:/home/openai-forward/Log
+    command:
+      - --port=8000
+      - --workers=1
+    restart: unless-stopped
+    labels:
+      caddy: ${OPENAI_FORWADR_HOSTNAME}
+      caddy.reverse_proxy: "{{upstreams 8000}}"
+    networks:
+      - caddy-net
+
+networks:
+  caddy-net:
+    external: true

@@ -21,4 +21,4 @@ services:
 
 networks:
   caddy-net:
-    external: true
+    name: caddy-net
